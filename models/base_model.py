@@ -23,8 +23,10 @@ class BaseModel:
     def to_dict(self):
         """ returns a dictionary containing all keys/values"""
 
-        return {
+        self.__dict__ = {
+            '__class__': __class__.__name__,
             'id': self.id,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
+        return self.__dict__
