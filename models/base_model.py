@@ -6,7 +6,7 @@ import uuid
 
 class BaseModel:
     """ Base Class """
-    
+
     def __init__(self):
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now().isoformat()
@@ -17,12 +17,12 @@ class BaseModel:
 
     def save(self):
         """ sets updated_at to current datetime """
-        
+
         self.updated_at = datetime.now().isoformat()
 
     def to_dict(self):
         """ returns a dictionary containing all keys/values"""
-        
+
         return {
             'id': self.id,
             'created_at': self.created_at,
