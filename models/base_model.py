@@ -2,6 +2,7 @@
 """ Base Model Class """
 from datetime import *
 import uuid
+import json
 
 
 class BaseModel:
@@ -22,7 +23,6 @@ class BaseModel:
 
     def to_dict(self):
         """ returns a dictionary containing all keys/values"""
-
         class_dict = self.__dict__.copy()
         class_dict['__class__'] = __class__.__name__
         class_dict['created_at'] = self.created_at.isoformat()
