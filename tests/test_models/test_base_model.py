@@ -1,15 +1,39 @@
 #!/usr/bin/python3
+""" test module for base model """
+import unittest
 from models.base_model import BaseModel
+from datetime import *
 
-my_model = BaseModel()
-my_model.name = "My First Model"
-my_model.my_number = 89
-print(my_model)
-my_model.save()
-print(my_model)
-my_model_json = my_model.to_dict()
-print(my_model_json)
-print("JSON of my_model:")
-for key in my_model_json.keys():
-    print("\t{}: ({}) - {}".format(key, type(my_model_json[key]),
-                                   my_model_json[key]))
+
+class BaseModelTest(unittest.TestCase):
+    """ tests for base model """
+
+    def test_Constructor(self):
+        test_instance = BaseModel()
+        self.assertIsInstance(test_instance, BaseModel)
+
+    def test_CreatedAt(self):
+        test_instance = BaseModel()
+        self.assertIsInstance(test_instance.created_at, datetime)
+
+    def test_UpdatedAt(self):
+        test_instance = BaseModel()
+        self.assertIsInstance(test_instance.updated_at, datetime)
+
+    def test_IDIsString(self):
+        test_instance = BaseModel()
+        self.assertIsInstance(test_instance.id, str)
+
+    def test_ExtraAttr(self):
+        test_instance = BaseModel()
+        test_instance.number = 69
+        self.assertIsInstance(test_instance.number, int)
+
+    def test_Save(self):
+        test_instance = BaseModel()
+        test_instance.save()
+        self.assertNotEqual(test_instance.created_at, test_instance.updated_at)
+
+    def test_ToDict(self):
+        test_instance = BaseModel()
+        self.assertIsInstance(test_instance.to_dict(), dict)
