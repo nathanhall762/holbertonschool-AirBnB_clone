@@ -27,7 +27,7 @@ class BaseModel:
         self.id = str(uuid.uuid4())
 
     def __str__(self):
-        return "[{}] ({}) <{}>".format(BaseModel.__name__, self.id,
+        return "[{}] ({}) {}".format(BaseModel.__name__, self.id,
                                        self.__dict__)
 
     def save(self):
