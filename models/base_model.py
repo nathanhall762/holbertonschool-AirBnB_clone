@@ -9,7 +9,9 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         if kwargs:
-            for key in kwargs:
+            for key, value in kwargs.items():
+                if key != "__class__":
+                    setattr(self, key, value)
                 if key == 'created_at':
                     self.created_at = datetime.strptime(kwargs['created_at'],
                                                         "%Y-%m-%dT%H:%M:%S.%f")
