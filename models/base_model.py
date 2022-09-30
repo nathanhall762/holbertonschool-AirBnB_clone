@@ -2,7 +2,6 @@
 """ Base Model Class """
 from datetime import datetime
 import uuid
-import json
 import models
 
 
@@ -33,8 +32,8 @@ class BaseModel:
 
     def save(self):
         """ sets updated_at to current datetime """
-        models.storage.save()
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """ returns a dictionary containing all keys/values"""
