@@ -4,6 +4,7 @@ import json
 
 
 class FileStorage:
+    """creating class for database engine"""
     __file_path = "file.json"
     __objects = {}
 
@@ -28,7 +29,7 @@ class FileStorage:
         no exception should be raised)
         """
         try:
-            with open(self.__file_path) as f:
+            with open(self.__file_path, 'r') as f:
                 self.__objects = json.loads(f.read())
         except:
             pass
