@@ -15,9 +15,6 @@ class HBNBCommand(cmd.Cmd):
         """foo"""
         return True
 
-    # def do_help(self, arg):
-        """bar"""
-
     def emptyline(self):
         """handles empty line"""
         pass
