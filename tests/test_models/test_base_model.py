@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Test module for base model class."""
 import unittest
+from unittest import mock
 from models.base_model import BaseModel
 from datetime import *
 
@@ -40,7 +41,7 @@ class BaseModelTest(unittest.TestCase):
         self.assertNotEqual(test_instance.created_at, test_instance.updated_at)
 
     def test_ToDict(self):
-        """ Test that to_dict returns dict with correct values and type."""
+        """Test that to_dict returns dict with correct values and type."""
         test_instance = BaseModel()
         self.assertIsInstance(test_instance.to_dict(), dict)
         test_instance.name = "name"
@@ -57,27 +58,25 @@ class BaseModelTest(unittest.TestCase):
                              "%Y-%m-%dT%H:%M:%S.%f"))
 
     def test_strMethod(self):
+        """Test that str method prints expected string."""
         test_instance = BaseModel()
         expected = "[BaseModel] ({}) {}".format(test_instance.id,
                                                 test_instance.__dict__)
         self.assertEqual(expected, str(test_instance))
 
     def test_Kwargs(self):
+        """Test that BaseModel instantiation occurs with kwargs."""
         my_model = BaseModel()
         my_model.name = "My_First_Model"
         my_model.my_number = 89
         my_model_json = my_model.to_dict()
         my_new_model = BaseModel(**my_model_json)
-        self.assertNotEqual(my_new_model.id, my_model.id)
+        self.assertEqual(my_new_model.id, my_model.id)
 
-    # def test_StringDictKwargs(self):
-    #     string_dict = {
-    #         "created_at": "string",
-    #         "updated-at": "string"
-    #         }
-    #     my_newer_model = BaseModel(**string_dict)
-
-    # def test_EmptyDictKwargs(self):
-    #     empty_dict = {}
-    #     my_newer_model = BaseModel(**empty_dict)
-    #     self.assertNotEqual(my_newer_model.to_dict, {})
+    @mock.patch('models.storage')
+    def test_save(self, mock_storage):
+        """Test that save method functions properly."""
+        test_instance = BaseModel()
+        test_instance.save()
+        self.assertTrue(mock_storage.new.called)
+        self.assertTrue(mock_storage.saved.called)
