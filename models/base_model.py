@@ -28,7 +28,7 @@ class BaseModel:
 
     def __str__(self):
         return "[{}] ({}) {}".format(BaseModel.__name__, self.id,
-                                       self.__dict__)
+                                     self.__dict__)
 
     def save(self):
         """ sets updated_at to current datetime """
