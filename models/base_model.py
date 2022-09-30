@@ -1,14 +1,17 @@
 #!/usr/bin/python3
 """ Base Model Class """
-from datetime import *
+from datetime import datetime
 import uuid
 import json
+import models
 
 
 class BaseModel:
     """ Base Class """
 
     def __init__(self, *args, **kwargs):
+        """instantiates base class"""
+        models.storage.new(self)
         if kwargs:
             for key, value in kwargs.items():
                 if key != "__class__":
@@ -19,12 +22,10 @@ class BaseModel:
                 if key == 'updated_at':
                     self.updated_at = datetime.strptime(kwargs['updated_at'],
                                                         "%Y-%m-%dT%H:%M:%S.%f")
-
         else:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-
-        self.id = str(uuid.uuid4())
+            self.id = str(uuid.uuid4())
 
     def __str__(self):
         return "[{}] ({}) {}".format(BaseModel.__name__, self.id,
@@ -32,7 +33,7 @@ class BaseModel:
 
     def save(self):
         """ sets updated_at to current datetime """
-
+        models.storage.save()
         self.updated_at = datetime.now()
 
     def to_dict(self):
