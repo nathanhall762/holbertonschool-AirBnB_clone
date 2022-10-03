@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """module for file storage"""
 import json
+import os
 
 
 class FileStorage:
@@ -39,10 +40,11 @@ class FileStorage:
         otherwise, do nothing. If the file does not exist,
         no exception should be raised)
         """
-        try:
+        # try:
+        if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as f:
                 # self.__objects = json.loads(f.read())
                 json_dict = json.load(f)
             self.__objects.update(json_dict)
-        except:
-            pass
+        # except:
+        #     pass
