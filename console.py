@@ -2,6 +2,11 @@
 """console command controller for airbnb clone"""
 import cmd
 import sys
+import models
+
+
+school = {"BaseModel": models.base_model.BaseModel()}
+bank = models.storage.all()
 
 
 class HBNBCommand(cmd.Cmd):
@@ -26,14 +31,33 @@ class HBNBCommand(cmd.Cmd):
         saves it (to the JSON file) and prints the id.
         Ex: $ create BaseModel
         """
-        pass
+        if len(arg) == 0:
+            print("** class name missing **")
+        elif arg == "BaseModel":
+            command = school[arg]
+            print(command.id)
+        else:
+            print("** class doesn't exist **")
 
     def do_show(self, arg):
         """
         Prints the string representation
         of an instance based on the class name and id.
+
         """
-        pass
+        args = arg.split()
+        if len(arg) == 0:
+            print("** class name missing **")
+        elif args[0] == "BaseModel":
+            if len(args) > 1:
+                found = f"{args[0]}.{args[1]}"
+                print(bank[found] if found in bank
+                      else "** no instance found **")
+            else:
+                print("** instance id missing **")
+        else:
+            print("** class doesn't exist **")
+
 
     def do_destroy(self, arg):
         """

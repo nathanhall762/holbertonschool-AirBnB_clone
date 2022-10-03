@@ -21,15 +21,15 @@ class BaseModel:
                     self.updated_at = datetime.strptime(kwargs['updated_at'],
                                                         "%Y-%m-%dT%H:%M:%S.%f")
         else:
+            self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            self.id = str(uuid.uuid4())
-            models.storage.new(self)
+        models.storage.new(self)
 
     def __str__(self):
         """overwriting ___str__ builtin"""
-        return "[{}] ({}) {}".format(BaseModel.__name__, self.id,
-                                     self.__dict__)
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         """ sets updated_at to current datetime """
