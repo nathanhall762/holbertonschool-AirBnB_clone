@@ -40,11 +40,11 @@ class FileStorage:
         otherwise, do nothing. If the file does not exist,
         no exception should be raised)
         """
-        # try:
-        if os.path.exists(self.__file_path):
+        try:
+            # if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as f:
-                # self.__objects = json.loads(f.read())
-                json_dict = json.load(f)
-            self.__objects.update(json_dict)
-        # except:
-        #     pass
+                self.__objects = json.loads(f.read())
+                # json_dict = json.load(f)
+            # self.__objects.update(json_dict)
+        except:
+            pass
