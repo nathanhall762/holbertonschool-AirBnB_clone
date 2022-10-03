@@ -1,13 +1,18 @@
 #!/usr/bin/python3
 """module for file storage"""
 import json
-import os
+from models.base_model import BaseModel
 
 
 class FileStorage:
     """creating class for database engine"""
-    __file_path = 'file.json'
-    __objects = {}
+
+    def __init__(self):
+        """
+        FileStorage object initializer.
+        """
+        self.__file_path = 'file.json'
+        self.__objects = {}
 
     def all(self):
         """ returns the dictionary __objects"""
