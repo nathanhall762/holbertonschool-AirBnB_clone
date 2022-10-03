@@ -15,11 +15,13 @@ class BaseModel:
                 if key != "__class__":
                     setattr(self, key, value)
                 if key == 'created_at':
-                    self.created_at = datetime.strptime(kwargs['created_at'],
-                                                        "%Y-%m-%dT%H:%M:%S.%f")
+                    self.created_at = datetime.strptime(
+                        kwargs['created_at'], "%Y-%m-%dT%H:%M:%S.%f"
+                        )
                 if key == 'updated_at':
-                    self.updated_at = datetime.strptime(kwargs['updated_at'],
-                                                        "%Y-%m-%dT%H:%M:%S.%f")
+                    self.updated_at = datetime.strptime(
+                        kwargs['updated_at'], "%Y-%m-%dT%H:%M:%S.%f"
+                        )
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -29,7 +31,8 @@ class BaseModel:
     def __str__(self):
         """overwriting ___str__ builtin"""
         return "[{}] ({}) {}".format(
-            self.__class__.__name__, self.id, self.__dict__)
+            self.__class__.__name__, self.id, self.__dict__
+            )
 
     def save(self):
         """ sets updated_at to current datetime """

@@ -5,7 +5,17 @@ import sys
 import models
 
 
-school = {"BaseModel": models.base_model.BaseModel()}
+school = {
+    "BaseModel": models.base_model.BaseModel()
+} # this should keep our classes to be accessed by our shell
+errors = {
+    "1": "** class name missing **",
+    "2": "** instance id missing **",
+    "3": "** attribute name missing **",
+    "4": "** value missing **",
+    "5": "** class doesn't exist **",
+    "6": "** no instance found"
+} # i would like to more elegantly handle the print() calls
 bank = models.storage.all()
 
 
@@ -32,12 +42,15 @@ class HBNBCommand(cmd.Cmd):
         Ex: $ create BaseModel
         """
         if len(arg) == 0:
-            print("** class name missing **")
-        elif arg == "BaseModel":
+            print(errors["1"])
+        elif arg in school.keys():
             command = school[arg]
+            command.save()
             print(command.id)
         else:
-            print("** class doesn't exist **")
+            print(errors["5"])
+        # this command keeps feeding back the same object id
+        # and i cant figure out if its making new ones or not
 
     def do_show(self, arg):
         """
@@ -47,17 +60,16 @@ class HBNBCommand(cmd.Cmd):
         """
         args = arg.split()
         if len(arg) == 0:
-            print("** class name missing **")
-        elif args[0] == "BaseModel":
+            print(errors["1"])
+        elif args[0] in school.keys():
             if len(args) > 1:
                 found = f"{args[0]}.{args[1]}"
                 print(bank[found] if found in bank
-                      else "** no instance found **")
+                      else errors["6"])
             else:
-                print("** instance id missing **")
+                print(errors["2"])
         else:
-            print("** class doesn't exist **")
-
+            print(errors["5"])
 
     def do_destroy(self, arg):
         """
@@ -65,7 +77,19 @@ class HBNBCommand(cmd.Cmd):
         name and id (save the change into the JSON file).
         Ex: $ destroy BaseModel 1234-1234-1234
         """
-        pass
+        args = arg.split()
+        if len(arg) == 0:
+            print(errors["1"])
+        elif args[0] in school.keys():
+            if len(args) > 1:
+                found = f"{args[0]}.{args[1]}"
+                if found in bank:
+                    del bank[found]
+                    models.storage.save()
+                else:
+                    print(errors["6"])
+        else:
+            print(errors["5"])
 
     def do_all(self, arg):
         """
@@ -73,7 +97,13 @@ class HBNBCommand(cmd.Cmd):
         of all instances based or not on the class name.
         Ex: $ all BaseModel or $ all
         """
-        pass
+        args = arg.split()
+        if len(arg) == 0:
+            print(school[args[1]] if args[1] in school.keys()
+              else errors["5"])
+        else:
+            print(school)
+        # using this shows a list index out of range :(
 
     def do_update(self, arg):
         """
@@ -81,7 +111,20 @@ class HBNBCommand(cmd.Cmd):
         or updating attribute (save the change into the JSON file).
         Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com"
         """
-        pass
+        args = arg.split()
+        commands = len(args)
+        if commands < 4:
+            print(errors[commands])
+        elif args[0] not in school.keys():
+            print(errors["5"])
+        else:
+            found = f"{args[0]}.{args[1]}"
+            if found in bank:
+                bank[found].update({
+                    args[2]: args[3].strip("'\"")
+                })
+            else:
+                print(errors["6"])
 
 
 if __name__ == '__main__':
