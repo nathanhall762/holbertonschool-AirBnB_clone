@@ -45,8 +45,8 @@ class HBNBCommand(cmd.Cmd):
             print(errors["1"])
         elif arg in school.keys():
             command = school[arg]
-            command.save()
             print(command.id)
+            command.save()
         else:
             print(errors["5"])
         # this command keeps feeding back the same object id
@@ -59,7 +59,7 @@ class HBNBCommand(cmd.Cmd):
 
         """
         args = arg.split()
-        if len(arg) == 0:
+        if len(args) == 0:
             print(errors["1"])
         elif args[0] in school.keys():
             if len(args) > 1:
@@ -78,7 +78,7 @@ class HBNBCommand(cmd.Cmd):
         Ex: $ destroy BaseModel 1234-1234-1234
         """
         args = arg.split()
-        if len(arg) == 0:
+        if len(args) == 0:
             print(errors["1"])
         elif args[0] in school.keys():
             if len(args) > 1:
@@ -98,7 +98,7 @@ class HBNBCommand(cmd.Cmd):
         Ex: $ all BaseModel or $ all
         """
         args = arg.split()
-        if len(arg) == 0:
+        if len(args) == 0:
             print(school[args[1]] if args[1] in school.keys()
               else errors["5"])
         else:
