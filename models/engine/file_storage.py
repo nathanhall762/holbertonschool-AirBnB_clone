@@ -7,12 +7,8 @@ from models.base_model import BaseModel
 class FileStorage:
     """creating class for database engine"""
 
-    def __init__(self):
-        """
-        FileStorage object initializer.
-        """
-        self.__file_path = 'file.json'
-        self.__objects = {}
+    __file_path = 'file.json'
+    __objects = {}
 
     def all(self):
         """ returns the dictionary __objects"""
@@ -31,13 +27,19 @@ class FileStorage:
         """serializes __objects to the JSON file (path: __file_path)"""
         # with open(self.__file_path, 'w') as f:
         #     f.write(json.dumps({key: value.to_dict()
-        #                         for key, value in self.__objects.items()}
+        #                         for key, value in self.__objects.items()},
         #                        ))
-        json_objects = {}
-        for key in self.__objects:
-            json_objects[key] = self.__objects[key].to_dict()
+        # json_objects = {}
+        # for key, value in self.__objects.items():
+        #     json_objects[key] = value.to_dict()
+        # with open(self.__file_path, 'w') as f:
+        #     f.write(json.dumps(json_objects))
         with open(self.__file_path, 'w') as f:
-            json.dump(json_objects, f)
+            json.dump(
+                {
+                    k: (v.to_dict() if not isinstance(v, dict) else v)
+                    for (k, v) in self.__objects.items()
+                }, f)
 
     def reload(self):
         """deserializes the JSON file to __objects
