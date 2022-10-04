@@ -6,7 +6,7 @@ import models
 
 
 school = {
-    "BaseModel": models.BaseModel()
+    "BaseModel": models.BaseModel
 } # this should keep our classes to be accessed by our shell
 errors = {
     "1": "** class name missing **",
@@ -44,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) == 0:
             print(errors["1"])
         elif arg in school.keys():
-            command = school[arg]
+            command = school[arg]()
             command.save()
             print(command.id)
         else:
@@ -102,7 +102,7 @@ class HBNBCommand(cmd.Cmd):
             print(school[args[1]] if args[1] in school.keys()
               else errors["5"])
         else:
-            print(school)
+            print(bank)
         # using this shows a list index out of range :(
 
     def do_update(self, arg):
