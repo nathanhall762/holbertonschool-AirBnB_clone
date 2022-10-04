@@ -6,8 +6,14 @@ import models
 
 
 school = {
-    "BaseModel": models.BaseModel
-} # this should keep our classes to be accessed by our shell
+    "Amenity": models.Amenity,
+    "BaseModel": models.BaseModel,
+    "City": models.City,
+    "Place": models.Place,
+    "Review": models.Review,
+    "State": models.State,
+    "User": models.User
+}
 errors = {
     "1": "** class name missing **",
     "2": "** instance id missing **",
@@ -15,7 +21,7 @@ errors = {
     "4": "** value missing **",
     "5": "** class doesn't exist **",
     "6": "** no instance found"
-} # i would like to more elegantly handle the print() calls
+}  # i would like to more elegantly handle the print() calls
 bank = models.storage.all()
 
 
@@ -59,7 +65,7 @@ class HBNBCommand(cmd.Cmd):
 
         """
         args = arg.split()
-        if len(arg) == 0:
+        if len(args) == 0:
             print(errors["1"])
         elif args[0] in school.keys():
             if len(args) > 1:
@@ -78,7 +84,7 @@ class HBNBCommand(cmd.Cmd):
         Ex: $ destroy BaseModel 1234-1234-1234
         """
         args = arg.split()
-        if len(arg) == 0:
+        if len(args) == 0:
             print(errors["1"])
         elif args[0] in school.keys():
             if len(args) > 1:
@@ -100,7 +106,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if len(arg) > 0:
             print(school[args[1]] if args[1] in school.keys()
-              else errors["5"])
+                  else errors["5"])
         else:
             print(bank)
         # using this shows a list index out of range :(
