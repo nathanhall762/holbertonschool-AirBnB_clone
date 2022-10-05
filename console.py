@@ -7,7 +7,7 @@ import models
 
 school = {
     "Amenity": models.Amenity,
-    "BaseModel": models.BaseModel,
+    "BaseModel": models.BaseModel(),
     "City": models.City,
     "Place": models.Place,
     "Review": models.Review,
@@ -21,7 +21,7 @@ errors = {
     "4": "** value missing **",
     "5": "** class doesn't exist **",
     "6": "** no instance found"
-}  # i would like to more elegantly handle the print() calls
+}
 bank = models.storage.all()
 
 
