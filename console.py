@@ -2,17 +2,23 @@
 """console command controller for airbnb clone"""
 import cmd
 import sys
-import models
-
+from models.base_model import BaseModel
+from models.amenity import Amenity
+from models.city import City
+from models.review import Review
+from models.place import Place
+from models.state import State
+from models.user import User
+from models import storage
 
 school = {
-    "Amenity": models.Amenity,
-    "BaseModel": models.BaseModel(),
-    "City": models.City,
-    "Place": models.Place,
-    "Review": models.Review,
-    "State": models.State,
-    "User": models.User
+    "Amenity": Amenity,
+    "BaseModel": BaseModel,
+    "City": City,
+    "Place": Place,
+    "Review": Review,
+    "State": State,
+    "User": User
 }
 errors = {
     "1": "** class name missing **",
@@ -22,7 +28,7 @@ errors = {
     "5": "** class doesn't exist **",
     "6": "** no instance found"
 }
-bank = models.storage.all()
+bank = storage.all()
 
 
 class HBNBCommand(cmd.Cmd):
