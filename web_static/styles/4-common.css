@@ -6,12 +6,12 @@ p {
 	right: 0;
 	left: 0;
 	color:#484848;
-	font: 14px;
-	font-family: Circular,"Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 body {
 	margin:0;
 	padding:0;
+	font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font: 14px;
 }
 
 body .container {
