@@ -1,0 +1,18 @@
+.places {
+	align-items: center;
+	font-size: 30px;
+}
+
+.places h1 {
+	;
+}
+
+.places article {
+	width: 390px;
+}
+
+.places h2 {
+	border-radius: 4px;
+	border: 1px solid #FF5A5F;
+	text-align: center;
+}
