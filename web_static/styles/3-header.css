@@ -6,4 +6,6 @@ header .logo {
 	background: url("../images/HBNBlogo.png") no-repeat;
 	left: 20px;
 	height: 100%;
+	top: 7%;
+	position: relative;
 }

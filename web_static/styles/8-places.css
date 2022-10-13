@@ -9,10 +9,10 @@
 
 .places article {
 	width: 390px;
+	border: 1px solid #FF5A5F;
+	border-radius: 4px;
+	text-align: center;
 }
 
 .places h2 {
-	border-radius: 4px;
-	border: 1px solid #FF5A5F;
-	text-align: center;
 }

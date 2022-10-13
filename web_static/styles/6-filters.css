@@ -33,6 +33,7 @@ button:hover {
 
 .filters h2 {
 	font-size: 16px;
+	margin-bottom: 0;
 }
 
 .filters h3 {
@@ -52,17 +53,25 @@ button:hover {
 	border-right: 1px solid #DDDDDD;
 }
 
-.popover {
+.filters .popover {
 	visibility: hidden;
 	background: #FAFAFA;
 	width: 100%;
+	height: auto;
 	border: 1px solid #DDDDDD;
 	position: absolute;
+	/* margin: auto; */
+	/* text-align: center; */
+}
+
+.popover ul {
+	list-style-type: none;
+
 }
 
 .amenities:hover .popover,
 .locations:hover .popover {
     visibility: visible;
-	display: block;
+	/* display: block; */
 }
 
