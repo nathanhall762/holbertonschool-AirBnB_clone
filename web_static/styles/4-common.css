@@ -1,5 +1,5 @@
 p {
-	position:absolute;
+	position:relative;
 	text-align:center;
 	top: 10%;
 	bottom: 0;
@@ -12,7 +12,7 @@ body {
 	padding:0;
 	font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font: 14px;
-	position: static;
+	position: relative;
 }
 
 body .container {
@@ -21,5 +21,5 @@ body .container {
 	margin-top: 30px;
 	margin-bottom: 30px;
 	margin: auto;
-	position: static;
+	position: relative;
 }
